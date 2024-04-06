@@ -1,0 +1,49 @@
+# Variáveis para armazenar informações da conta
+saldo = 0
+limite = 500 
+extrato_conta = ""
+numero_saque = 0 
+saques_no_dia = 3
+
+# Função para exibir o extrato da conta
+def mostrar_extrato():
+    print("Saldo atual: R$", saldo)
+    print("Histórico de transações:")
+    print(extrato_conta)
+
+# Loop principal do sistema bancário
+while True:
+    print("\nEscolha uma opção:")
+    print("1. Extrato")
+    print("2. Saque")
+    print("3. Depósito")
+    print("4. Sair")
+
+    opcao = input("Digite o número da opção desejada: ")
+
+    if opcao == "1":
+        mostrar_extrato()
+
+    elif opcao == "2":
+        valor = float(input("Digite o valor a sacar: "))
+        if numero_saque < saques_no_dia:
+            if saldo - valor >= limite:
+                saldo -= valor
+                extrato_conta += f"Saque de R$ {valor}\n"
+                numero_saque += 1
+            else:
+                print("Saldo insuficiente.")
+        else:
+            print("Limite de saques no dia atingido.")
+
+    elif opcao == "3":
+        valor = float(input("Digite o valor a depositar: "))
+        saldo += valor
+        extrato_conta += f"Depósito de R$ {valor}\n"
+        
+    elif opcao == "4":
+        print("Sair.")
+        break
+
+    else:
+        print("Opção inválida. Tente novamente.")
